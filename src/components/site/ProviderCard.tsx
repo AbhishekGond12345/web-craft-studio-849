@@ -6,7 +6,7 @@ import { RatingStars } from "./RatingStars";
 import { rupees, type TiffinProvider } from "@/data/marketplace";
 
 export function ProviderCard({ provider }: { provider: TiffinProvider }) {
-  const today = provider.todaysMenu[0];
+  const today = provider.todaysMenu[0]!;
 
   return (
     <article className="surface-card group flex flex-col overflow-hidden hover:-translate-y-1">
