@@ -10,33 +10,91 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PlansRouteImport } from './routes/plans'
+import { Route as LaundryIndexRouteImport } from './routes/laundry/index'
+import { Route as LaundryIdRouteImport } from './routes/laundry/$id'
+import { Route as TiffinIndexRouteImport } from './routes/tiffin/index'
+import { Route as TiffinIdRouteImport } from './routes/tiffin/$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PlansRoute = PlansRouteImport.update({
+  id: '/plans',
+  path: '/plans',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LaundryIndexRoute = LaundryIndexRouteImport.update({
+  id: '/laundry/',
+  path: '/laundry/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LaundryIdRoute = LaundryIdRouteImport.update({
+  id: '/laundry/$id',
+  path: '/laundry/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TiffinIndexRoute = TiffinIndexRouteImport.update({
+  id: '/tiffin/',
+  path: '/tiffin/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TiffinIdRoute = TiffinIdRouteImport.update({
+  id: '/tiffin/$id',
+  path: '/tiffin/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/plans': typeof PlansRoute
+  '/laundry/$id': typeof LaundryIdRoute
+  '/tiffin/$id': typeof TiffinIdRoute
+  '/laundry/': typeof LaundryIndexRoute
+  '/tiffin/': typeof TiffinIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/plans': typeof PlansRoute
+  '/laundry/$id': typeof LaundryIdRoute
+  '/tiffin/$id': typeof TiffinIdRoute
+  '/laundry': typeof LaundryIndexRoute
+  '/tiffin': typeof TiffinIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/plans': typeof PlansRoute
+  '/laundry/$id': typeof LaundryIdRoute
+  '/tiffin/$id': typeof TiffinIdRoute
+  '/laundry/': typeof LaundryIndexRoute
+  '/tiffin/': typeof TiffinIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    '/' | '/plans' | '/laundry/$id' | '/tiffin/$id' | '/laundry/' | '/tiffin/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/plans' | '/laundry/$id' | '/tiffin/$id' | '/laundry' | '/tiffin'
+  id:
+    | '__root__'
+    | '/'
+    | '/plans'
+    | '/laundry/$id'
+    | '/tiffin/$id'
+    | '/laundry/'
+    | '/tiffin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  PlansRoute: typeof PlansRoute
+  LaundryIdRoute: typeof LaundryIdRoute
+  TiffinIdRoute: typeof TiffinIdRoute
+  LaundryIndexRoute: typeof LaundryIndexRoute
+  TiffinIndexRoute: typeof TiffinIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +106,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/plans': {
+      id: '/plans'
+      path: '/plans'
+      fullPath: '/plans'
+      preLoaderRoute: typeof PlansRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/laundry/': {
+      id: '/laundry/'
+      path: '/laundry'
+      fullPath: '/laundry/'
+      preLoaderRoute: typeof LaundryIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/laundry/$id': {
+      id: '/laundry/$id'
+      path: '/laundry/$id'
+      fullPath: '/laundry/$id'
+      preLoaderRoute: typeof LaundryIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tiffin/': {
+      id: '/tiffin/'
+      path: '/tiffin'
+      fullPath: '/tiffin/'
+      preLoaderRoute: typeof TiffinIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tiffin/$id': {
+      id: '/tiffin/$id'
+      path: '/tiffin/$id'
+      fullPath: '/tiffin/$id'
+      preLoaderRoute: typeof TiffinIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PlansRoute: PlansRoute,
+  LaundryIdRoute: LaundryIdRoute,
+  TiffinIdRoute: TiffinIdRoute,
+  LaundryIndexRoute: LaundryIndexRoute,
+  TiffinIndexRoute: TiffinIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
