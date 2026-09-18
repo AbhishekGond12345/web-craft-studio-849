@@ -10,15 +10,29 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as OrdersRouteImport } from './routes/orders'
 import { Route as PlansRouteImport } from './routes/plans'
 import { Route as LaundryIndexRouteImport } from './routes/laundry/index'
 import { Route as LaundryIdRouteImport } from './routes/laundry/$id'
+import { Route as LaundryBookRouteImport } from './routes/laundry/book'
 import { Route as TiffinIndexRouteImport } from './routes/tiffin/index'
 import { Route as TiffinIdRouteImport } from './routes/tiffin/$id'
+import { Route as TrackIdRouteImport } from './routes/track.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CheckoutRoute = CheckoutRouteImport.update({
+  id: '/checkout',
+  path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrdersRoute = OrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PlansRoute = PlansRouteImport.update({
@@ -36,6 +50,11 @@ const LaundryIdRoute = LaundryIdRouteImport.update({
   path: '/laundry/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const LaundryBookRoute = LaundryBookRouteImport.update({
+  id: '/laundry/book',
+  path: '/laundry/book',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TiffinIndexRoute = TiffinIndexRouteImport.update({
   id: '/tiffin/',
   path: '/tiffin/',
@@ -46,53 +65,97 @@ const TiffinIdRoute = TiffinIdRouteImport.update({
   path: '/tiffin/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TrackIdRoute = TrackIdRouteImport.update({
+  id: '/track/$id',
+  path: '/track/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/checkout': typeof CheckoutRoute
+  '/orders': typeof OrdersRoute
   '/plans': typeof PlansRoute
   '/laundry/$id': typeof LaundryIdRoute
+  '/laundry/book': typeof LaundryBookRoute
   '/tiffin/$id': typeof TiffinIdRoute
+  '/track/$id': typeof TrackIdRoute
   '/laundry/': typeof LaundryIndexRoute
   '/tiffin/': typeof TiffinIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/checkout': typeof CheckoutRoute
+  '/orders': typeof OrdersRoute
   '/plans': typeof PlansRoute
   '/laundry/$id': typeof LaundryIdRoute
+  '/laundry/book': typeof LaundryBookRoute
   '/tiffin/$id': typeof TiffinIdRoute
+  '/track/$id': typeof TrackIdRoute
   '/laundry': typeof LaundryIndexRoute
   '/tiffin': typeof TiffinIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/checkout': typeof CheckoutRoute
+  '/orders': typeof OrdersRoute
   '/plans': typeof PlansRoute
   '/laundry/$id': typeof LaundryIdRoute
+  '/laundry/book': typeof LaundryBookRoute
   '/tiffin/$id': typeof TiffinIdRoute
+  '/track/$id': typeof TrackIdRoute
   '/laundry/': typeof LaundryIndexRoute
   '/tiffin/': typeof TiffinIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/plans' | '/laundry/$id' | '/tiffin/$id' | '/laundry/' | '/tiffin/'
+    | '/'
+    | '/checkout'
+    | '/orders'
+    | '/plans'
+    | '/laundry/$id'
+    | '/laundry/book'
+    | '/tiffin/$id'
+    | '/track/$id'
+    | '/laundry/'
+    | '/tiffin/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/plans' | '/laundry/$id' | '/tiffin/$id' | '/laundry' | '/tiffin'
+  to:
+    | '/'
+    | '/checkout'
+    | '/orders'
+    | '/plans'
+    | '/laundry/$id'
+    | '/laundry/book'
+    | '/tiffin/$id'
+    | '/track/$id'
+    | '/laundry'
+    | '/tiffin'
   id:
     | '__root__'
     | '/'
+    | '/checkout'
+    | '/orders'
     | '/plans'
     | '/laundry/$id'
+    | '/laundry/book'
     | '/tiffin/$id'
+    | '/track/$id'
     | '/laundry/'
     | '/tiffin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CheckoutRoute: typeof CheckoutRoute
+  OrdersRoute: typeof OrdersRoute
   PlansRoute: typeof PlansRoute
   LaundryIdRoute: typeof LaundryIdRoute
+  LaundryBookRoute: typeof LaundryBookRoute
   TiffinIdRoute: typeof TiffinIdRoute
+  TrackIdRoute: typeof TrackIdRoute
   LaundryIndexRoute: typeof LaundryIndexRoute
   TiffinIndexRoute: typeof TiffinIndexRoute
 }
@@ -104,6 +167,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout': {
+      id: '/checkout'
+      path: '/checkout'
+      fullPath: '/checkout'
+      preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/orders': {
+      id: '/orders'
+      path: '/orders'
+      fullPath: '/orders'
+      preLoaderRoute: typeof OrdersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/plans': {
@@ -127,6 +204,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LaundryIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/laundry/book': {
+      id: '/laundry/book'
+      path: '/laundry/book'
+      fullPath: '/laundry/book'
+      preLoaderRoute: typeof LaundryBookRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tiffin/': {
       id: '/tiffin/'
       path: '/tiffin'
@@ -141,14 +225,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TiffinIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/track/$id': {
+      id: '/track/$id'
+      path: '/track/$id'
+      fullPath: '/track/$id'
+      preLoaderRoute: typeof TrackIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CheckoutRoute: CheckoutRoute,
+  OrdersRoute: OrdersRoute,
   PlansRoute: PlansRoute,
   LaundryIdRoute: LaundryIdRoute,
+  LaundryBookRoute: LaundryBookRoute,
   TiffinIdRoute: TiffinIdRoute,
+  TrackIdRoute: TrackIdRoute,
   LaundryIndexRoute: LaundryIndexRoute,
   TiffinIndexRoute: TiffinIndexRoute,
 }
