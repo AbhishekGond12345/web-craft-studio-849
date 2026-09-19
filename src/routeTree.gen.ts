@@ -10,9 +10,12 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as CheckoutRouteImport } from './routes/checkout'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as OrdersRouteImport } from './routes/orders'
 import { Route as PlansRouteImport } from './routes/plans'
+import { Route as ProviderRouteImport } from './routes/provider'
 import { Route as LaundryIndexRouteImport } from './routes/laundry/index'
 import { Route as LaundryIdRouteImport } from './routes/laundry/$id'
 import { Route as LaundryBookRouteImport } from './routes/laundry/book'
@@ -25,9 +28,19 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CheckoutRoute = CheckoutRouteImport.update({
   id: '/checkout',
   path: '/checkout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OrdersRoute = OrdersRouteImport.update({
@@ -38,6 +51,11 @@ const OrdersRoute = OrdersRouteImport.update({
 const PlansRoute = PlansRouteImport.update({
   id: '/plans',
   path: '/plans',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProviderRoute = ProviderRouteImport.update({
+  id: '/provider',
+  path: '/provider',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LaundryIndexRoute = LaundryIndexRouteImport.update({
@@ -73,9 +91,12 @@ const TrackIdRoute = TrackIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/checkout': typeof CheckoutRoute
+  '/dashboard': typeof DashboardRoute
   '/orders': typeof OrdersRoute
   '/plans': typeof PlansRoute
+  '/provider': typeof ProviderRoute
   '/laundry/$id': typeof LaundryIdRoute
   '/laundry/book': typeof LaundryBookRoute
   '/tiffin/$id': typeof TiffinIdRoute
@@ -85,9 +106,12 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/checkout': typeof CheckoutRoute
+  '/dashboard': typeof DashboardRoute
   '/orders': typeof OrdersRoute
   '/plans': typeof PlansRoute
+  '/provider': typeof ProviderRoute
   '/laundry/$id': typeof LaundryIdRoute
   '/laundry/book': typeof LaundryBookRoute
   '/tiffin/$id': typeof TiffinIdRoute
@@ -98,9 +122,12 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/checkout': typeof CheckoutRoute
+  '/dashboard': typeof DashboardRoute
   '/orders': typeof OrdersRoute
   '/plans': typeof PlansRoute
+  '/provider': typeof ProviderRoute
   '/laundry/$id': typeof LaundryIdRoute
   '/laundry/book': typeof LaundryBookRoute
   '/tiffin/$id': typeof TiffinIdRoute
@@ -112,9 +139,12 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/checkout'
+    | '/dashboard'
     | '/orders'
     | '/plans'
+    | '/provider'
     | '/laundry/$id'
     | '/laundry/book'
     | '/tiffin/$id'
@@ -124,9 +154,12 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin'
     | '/checkout'
+    | '/dashboard'
     | '/orders'
     | '/plans'
+    | '/provider'
     | '/laundry/$id'
     | '/laundry/book'
     | '/tiffin/$id'
@@ -136,9 +169,12 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/checkout'
+    | '/dashboard'
     | '/orders'
     | '/plans'
+    | '/provider'
     | '/laundry/$id'
     | '/laundry/book'
     | '/tiffin/$id'
@@ -149,9 +185,12 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
   CheckoutRoute: typeof CheckoutRoute
+  DashboardRoute: typeof DashboardRoute
   OrdersRoute: typeof OrdersRoute
   PlansRoute: typeof PlansRoute
+  ProviderRoute: typeof ProviderRoute
   LaundryIdRoute: typeof LaundryIdRoute
   LaundryBookRoute: typeof LaundryBookRoute
   TiffinIdRoute: typeof TiffinIdRoute
@@ -169,11 +208,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/checkout': {
       id: '/checkout'
       path: '/checkout'
       fullPath: '/checkout'
       preLoaderRoute: typeof CheckoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/orders': {
@@ -188,6 +241,13 @@ declare module '@tanstack/react-router' {
       path: '/plans'
       fullPath: '/plans'
       preLoaderRoute: typeof PlansRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/provider': {
+      id: '/provider'
+      path: '/provider'
+      fullPath: '/provider'
+      preLoaderRoute: typeof ProviderRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/laundry/': {
@@ -237,9 +297,12 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
   CheckoutRoute: CheckoutRoute,
+  DashboardRoute: DashboardRoute,
   OrdersRoute: OrdersRoute,
   PlansRoute: PlansRoute,
+  ProviderRoute: ProviderRoute,
   LaundryIdRoute: LaundryIdRoute,
   LaundryBookRoute: LaundryBookRoute,
   TiffinIdRoute: TiffinIdRoute,
