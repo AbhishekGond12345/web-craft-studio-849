@@ -11,13 +11,17 @@ import { Separator } from "@/components/ui/separator";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { rupees, tiffinProviders } from "@/data/marketplace";
 
-type CheckoutSearch = { provider?: string; plan?: string; qty?: number };
+type CheckoutSearch = {
+  provider?: string | undefined;
+  plan?: string | undefined;
+  qty?: number | undefined;
+};
 
 export const Route = createFileRoute("/checkout")({
   validateSearch: (search: Record<string, unknown>): CheckoutSearch => ({
-    provider: typeof search.provider === "string" ? search.provider : undefined,
-    plan: typeof search.plan === "string" ? search.plan : undefined,
-    qty: Number(search.qty) > 0 ? Number(search.qty) : undefined,
+    provider: typeof search["provider"] === "string" ? search["provider"] : undefined,
+    plan: typeof search["plan"] === "string" ? search["plan"] : undefined,
+    qty: Number(search["qty"]) > 0 ? Number(search["qty"]) : undefined,
   }),
   head: () => ({
     meta: [

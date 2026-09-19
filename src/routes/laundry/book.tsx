@@ -10,11 +10,11 @@ import { Separator } from "@/components/ui/separator";
 import { Checkbox } from "@/components/ui/checkbox";
 import { laundryProviders, rupees } from "@/data/marketplace";
 
-type BookSearch = { provider?: string };
+type BookSearch = { provider?: string | undefined };
 
 export const Route = createFileRoute("/laundry/book")({
   validateSearch: (search: Record<string, unknown>): BookSearch => ({
-    provider: typeof search.provider === "string" ? search.provider : undefined,
+    provider: typeof search["provider"] === "string" ? search["provider"] : undefined,
   }),
   head: () => ({
     meta: [
