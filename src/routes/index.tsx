@@ -113,7 +113,13 @@ function Home() {
                 </label>
                 <Select value={service} onValueChange={setService}>
                   <SelectTrigger id="service" className="h-11 rounded-xl">
-                    <SelectValue />
+                    <SelectValue>
+                      {service === "laundry"
+                        ? "Laundry Service"
+                        : service === "plan"
+                          ? "Monthly Meal Plan"
+                          : "Tiffin Service"}
+                    </SelectValue>
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="tiffin">Tiffin Service</SelectItem>
